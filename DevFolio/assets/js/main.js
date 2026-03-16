@@ -258,10 +258,91 @@
         navmenulink.classList.remove('active');
       }
     })
+
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
+    /**
+   * Portfolio showcase (dots + cambio de contenido)
+   */
+  const portfolioBody = document.querySelector('#portfolio-body');
+  const portfolioMediaHost = document.querySelector('#portfolio-media-host');
+  const portfolioTitle = document.querySelector('#portfolio-feature-title');
+  const portfolioDescription = document.querySelector('#portfolio-feature-description');
+  const portfolioDots = document.querySelectorAll('.portfolio-dot');
 
+  if (portfolioBody && portfolioMediaHost && portfolioTitle && portfolioDescription && portfolioDots.length) {
+    const portfolioProjects = [
+      {
+        title: 'Proyecto 1',
+        description: 'Descripcion de las funciones del proyecto 1. Aqui puedes explicar mecanicas, tecnologias y logros del desarrollo.',
+        type: 'image',
+        src: 'assets/img/portfolio/NighLight.png',
+        alt: 'Proyecto 1'
+      },
+      /*
+      {
+        title: 'Proyecto 2',
+        description: 'Descripcion de las funciones del proyecto 2. Puedes mencionar sistemas, pipeline y resultados principales.',
+        type: 'image',
+        src: 'assets/img/portfolio/app-1.jpg',
+        alt: 'Proyecto 2'
+      },
+      {
+        title: 'Proyecto 3',
+        description: 'Descripcion de las funciones del proyecto 3. Añade enfoque tecnico y valor para el usuario final.',
+        type: 'video',
+        src: 'assets/img/portfolio/demo.mp4',
+        poster: 'assets/img/portfolio/branding-1.jpg'
+      }
+      */
+    ];
+
+    function buildMedia(project) {
+      if (project.type === 'video') {
+        const video = document.createElement('video');
+        video.src = project.src;
+        video.poster = project.poster || '';
+        video.controls = true;
+        video.preload = 'metadata';
+        return video;
+      }
+
+      const img = document.createElement('img');
+      img.src = project.src;
+      img.alt = project.alt || project.title;
+      return img;
+    }
+
+    function renderProject(index) {
+      const project = portfolioProjects[index];
+      if (!project) return;
+
+      portfolioBody.classList.add('is-changing');
+
+      setTimeout(() => {
+        portfolioTitle.textContent = project.title;
+        portfolioDescription.textContent = project.description;
+        portfolioMediaHost.innerHTML = '';
+        portfolioMediaHost.appendChild(buildMedia(project));
+
+        portfolioDots.forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+
+        portfolioBody.classList.remove('is-changing');
+      }, 180);
+    }
+
+    portfolioDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.getAttribute('data-index'));
+        renderProject(index);
+      });
+    });
+
+    renderProject(0);
+  }
   /**
  * Hero scroll indicator — se oculta al hacer scroll
  * Principio: Progressive Enhancement — el icono funciona como enlace

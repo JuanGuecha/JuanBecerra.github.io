@@ -19,9 +19,9 @@
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #4e4e4e; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #0a090f; /* Color for headings, subheadings and title throughout the website */
+  --background-color: #f8fafc; /* Background color for the entire website, including individual sections */
+  --default-color: #1e293b; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #0f172a; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #0078ff; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
@@ -619,6 +619,25 @@ section,
   overflow: clip;
 }
 
+/* Keep section backgrounds full width while constraining inner content */
+.main section > .container,
+.main .section > .container {
+  width: min(100%, 1080px);
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 1200px) {
+  .main section > .container,
+  .main .section > .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
 @media (max-width: 1199px) {
 
   section,
@@ -626,6 +645,7 @@ section,
     scroll-margin-top: 76px;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Global Section Titles
@@ -926,6 +946,12 @@ section,
   transition: ease-in-out 0.3s;
 }
 
+.services .icon img,
+.services .icon svg {
+  width: 48px;
+  height: 48px;
+}
+
 .services .service-item h3 {
   font-weight: 700;
   margin: 10px 0 15px 0;
@@ -955,7 +981,8 @@ section,
 --------------------------------------------------------------*/
 .stats {
   position: relative;
-  padding: 120px 0;
+  min-height: clamp(320px, 40vh, 500px);
+  padding: 0;
 }
 
 .stats img {
@@ -965,12 +992,13 @@ section,
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 60%;
   z-index: 1;
 }
 
 .stats:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 40%);
+  background: color-mix(in srgb, white, transparent 55%);
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -1098,6 +1126,105 @@ section,
 .portfolio .portfolio-item:hover .portfolio-info {
   opacity: 1;
   bottom: 20px;
+}
+/* Portfolio Showcase (custom) */
+.portfolio .portfolio-shell {
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: clamp(18px, 3vw, 36px);
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio .portfolio-head {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.portfolio .portfolio-title {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: 0.04em;
+}
+
+.portfolio .portfolio-dots {
+  display: flex;
+  gap: 12px;
+}
+
+.portfolio .portfolio-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #111;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.25s ease;
+}
+
+.portfolio .portfolio-dot:hover {
+  transform: scale(1.1);
+}
+
+.portfolio .portfolio-dot.is-active {
+  background: #111;
+}
+
+.portfolio .portfolio-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 3vw, 36px);
+  align-items: center;
+}
+
+.portfolio .portfolio-media-frame {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 4px solid #111;
+  border-radius: 46px;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.portfolio .portfolio-media-frame img,
+.portfolio .portfolio-media-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Transicion suave al cambiar proyecto */
+.portfolio .portfolio-body .portfolio-media-frame,
+.portfolio .portfolio-body .portfolio-copy {
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.portfolio .portfolio-body.is-changing .portfolio-media-frame,
+.portfolio .portfolio-body.is-changing .portfolio-copy {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.portfolio .portfolio-copy h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-size: clamp(20px, 2.2vw, 30px);
+}
+
+.portfolio .portfolio-copy p {
+  margin: 0;
+  font-size: clamp(15px, 1.5vw, 20px);
+  line-height: 1.6;
+}
+
+@media (max-width: 991px) {
+  .portfolio .portfolio-body {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*--------------------------------------------------------------
