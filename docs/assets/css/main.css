@@ -1190,7 +1190,39 @@ section,
   overflow: hidden;
   background: #f2f2f2;
 }
+/*-------------------------------------------------------------------------------------*/
 
+/* Micro-interaccion hover para imagen del portafolio */
+.portfolio .portfolio-media-frame {
+  position: relative;
+  cursor: pointer; /* indica que es clickable */
+  transform: translateY(0) scale(1);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.14); /* sombra base suave */
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, filter 0.3s ease-out;
+  will-change: transform, box-shadow;
+}
+
+/* Hover con elevacion sutil */
+.portfolio .portfolio-media-frame:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.24); /* mas difusa y oscura */
+}
+
+/* Opcional: brillo ligero al hover */
+.portfolio .portfolio-media-frame:hover img {
+  filter: brightness(1.03);
+}
+
+/* Respeto a usuarios con movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio .portfolio-media-frame {
+    transition: none;
+  }
+  .portfolio .portfolio-media-frame:hover {
+    transform: none;
+  }
+}
+/*----------------------------------------------------------------------------------------*/
 .portfolio .portfolio-media-frame img,
 .portfolio .portfolio-media-frame video {
   width: 100%;
@@ -1221,6 +1253,10 @@ section,
   margin: 0;
   font-size: clamp(15px, 1.5vw, 20px);
   line-height: 1.6;
+}
+
+#portfolio-feature-description {
+  white-space: pre-line;
 }
 
 @media (max-width: 991px) {

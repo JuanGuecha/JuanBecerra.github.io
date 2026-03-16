@@ -274,11 +274,12 @@
   if (portfolioBody && portfolioMediaHost && portfolioTitle && portfolioDescription && portfolioDots.length) {
     const portfolioProjects = [
       {
-        title: 'Proyecto 1',
-        description: 'Descripcion de las funciones del proyecto 1. Aqui puedes explicar mecanicas, tecnologias y logros del desarrollo.',
+        title: 'NightLight:',
+        description: '-Diseño de niveles y puzzles coherentes con la narrativa del juego, utilizando Tilemaps, Tilesets y herramientas de diseño de niveles en Unity.\n\n-Desarrollo de assets en 2D-estilo pixel art, implementados en Unity con sus respectivas animaciones conforme a la estetica del diseño.',
         type: 'image',
         src: 'assets/img/portfolio/NighLight.png',
-        alt: 'Proyecto 1'
+        alt: 'Proyecto 1',
+        url: 'https://sebastian-franco-gomez.itch.io/nightlight'
       },
       /*
       {
@@ -299,19 +300,31 @@
     ];
 
     function buildMedia(project) {
+      let media;
+
       if (project.type === 'video') {
-        const video = document.createElement('video');
-        video.src = project.src;
-        video.poster = project.poster || '';
-        video.controls = true;
-        video.preload = 'metadata';
-        return video;
+      media = document.createElement('video');
+      media.src = project.src;
+      media.poster = project.poster || '';
+      media.controls = true;
+      media.preload = 'metadata';
+      } else {
+      media = document.createElement('img');
+      media.src = project.src;
+      media.alt = project.alt || project.title;
       }
 
-      const img = document.createElement('img');
-      img.src = project.src;
-      img.alt = project.alt || project.title;
-      return img;
+      if (project.url) {
+      const link = document.createElement('a');
+      link.href = project.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', 'Ver ' + project.title + ' en itch.io');
+      link.appendChild(media);
+      return link;
+      }
+
+      return media;
     }
 
     function renderProject(index) {
