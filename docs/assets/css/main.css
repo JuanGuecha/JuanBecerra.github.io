@@ -1238,6 +1238,7 @@ section,
 }
 /* Portfolio Showcase (custom) */
 .portfolio .portfolio-shell {
+  --portfolio-block-gap: 18px;
   border: 1px solid #e5e7eb;
   border-radius: 18px;
   padding: clamp(18px, 3vw, 36px);
@@ -1291,6 +1292,12 @@ section,
   align-items: center;
 }
 
+.portfolio .portfolio-media-wrap {
+  display: grid;
+  gap: 16px;
+  align-self: start;
+}
+
 .portfolio .portfolio-media-frame {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -1337,31 +1344,171 @@ section,
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   display: block;
 }
 
 /* Transicion suave al cambiar proyecto */
 .portfolio .portfolio-body .portfolio-media-frame,
+.portfolio .portfolio-body .portfolio-experience,
 .portfolio .portfolio-body .portfolio-copy {
   transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
 .portfolio .portfolio-body.is-changing .portfolio-media-frame,
+.portfolio .portfolio-body.is-changing .portfolio-experience,
 .portfolio .portfolio-body.is-changing .portfolio-copy {
   opacity: 0;
   transform: translateY(8px);
 }
 
+.portfolio .portfolio-copy {
+  align-self: start;
+  display: grid;
+  gap: var(--portfolio-block-gap);
+}
+
 .portfolio .portfolio-copy h3 {
-  margin-top: 0;
-  margin-bottom: 14px;
+  margin: 0;
   font-size: clamp(20px, 2.2vw, 30px);
 }
 
-.portfolio .portfolio-copy p {
+.portfolio .portfolio-description-block {
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.portfolio .portfolio-description-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.portfolio .portfolio-description-block p {
   margin: 0;
   font-size: clamp(15px, 1.5vw, 20px);
   line-height: 1.6;
+  color: #1f2937;
+  white-space: pre-line;
+}
+
+.portfolio .portfolio-gallery-block {
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.portfolio .portfolio-gallery-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.portfolio .portfolio-gallery-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.portfolio .portfolio-gallery-preview {
+  margin-top: 12px;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  border: 1px solid #dbe3ea;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.portfolio .portfolio-gallery-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid #dbe3ea;
+  background: #ffffff;
+  box-shadow: 0 8px 14px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.portfolio .portfolio-gallery-item.is-selected {
+  border-color: #111;
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.16);
+  transform: scale(1.02);
+}
+
+.portfolio .portfolio-gallery-item:hover {
+  transform: scale(1.04);
+}
+
+.portfolio .portfolio-gallery-item img,
+.portfolio .portfolio-gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0f172a;
+  display: block;
+}
+
+.portfolio .portfolio-gallery-preview img,
+.portfolio .portfolio-gallery-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0f172a;
+  display: block;
+}
+
+.portfolio .portfolio-gallery-empty {
+  margin: 0;
+  padding: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.portfolio .portfolio-experience {
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.portfolio .portfolio-experience-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.portfolio .portfolio-experience p {
+  margin: 0;
+  font-size: clamp(14px, 1.35vw, 18px);
+  line-height: 1.6;
+  color: #1f2937;
+  white-space: pre-line;
 }
 
 #portfolio-feature-description {
@@ -1371,6 +1518,14 @@ section,
 @media (max-width: 991px) {
   .portfolio .portfolio-body {
     grid-template-columns: 1fr;
+  }
+
+  .portfolio .portfolio-copy {
+    order: 2;
+  }
+
+  .portfolio .portfolio-media-wrap {
+    order: 1;
   }
 }
 
