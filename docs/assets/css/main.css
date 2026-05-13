@@ -1562,6 +1562,7 @@ section,
   object-fit: contain;
   background: #0f172a;
   display: block;
+  pointer-events: none; /* Desactiva clics internos en el video/imagen para que el wrapper maneje el click */
 }
 
 .portfolio .portfolio-gallery-preview img,
