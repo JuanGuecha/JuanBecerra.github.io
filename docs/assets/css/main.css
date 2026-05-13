@@ -1869,17 +1869,27 @@ section,
 }
 
 .contact .info-item i {
-  font-size: 20px;
+  font-size: 24px;
   color: var(--accent-color);
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease-in-out;
   border-radius: 50%;
   border: 1px solid color-mix(in srgb, var(--accent-color), transparent 40%);
-  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.contact .info-item {
+  color: var(--default-color);
+  transition: all 0.3s ease;
+}
+
+.contact .info-item:hover {
+  transform: translateY(-5px);
+  color: var(--accent-color);
 }
 
 .contact .info-item h3 {
