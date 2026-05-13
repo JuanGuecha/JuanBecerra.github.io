@@ -967,6 +967,23 @@ section,
 .about .about-me p {
   font-size: 18px;
 }
+.about-cv-logo {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center; /* Alineado a la izquierda con el texto */
+}
+
+.about-cv-logo img {
+  width: 100px; /* Ajusta el tamaño según prefieras */
+  height: auto;
+  opacity: 0.8; /* Un toque sutil */
+  transition: transform 0.3s ease;
+}
+
+.about-cv-logo img:hover {
+  transform: scale(1.1); /* Animación al pasar el mouse */
+  opacity: 1;
+}
 
 /*--------------------------------------------------------------
 # Resume Section
@@ -1236,8 +1253,10 @@ section,
   opacity: 1;
   bottom: 20px;
 }
+/* Estilos aplicados directamente a la descripción para respetar tabulaciones */
 /* Portfolio Showcase (custom) */
 .portfolio .portfolio-shell {
+  position: relative;
   --portfolio-block-gap: 18px;
   border: 1px solid #e5e7eb;
   border-radius: 18px;
@@ -1249,8 +1268,54 @@ section,
 .portfolio .portfolio-head {
   display: grid;
   justify-items: center;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 26px;
+}
+
+.portfolio .portfolio-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  z-index: 10;
+  color: rgba(17, 17, 17, 0.4);
+  font-size: 2.5rem;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+.portfolio .portfolio-nav-btn.prev {
+  left: -60px;
+}
+
+.portfolio .portfolio-nav-btn.next {
+  right: -110px;
+}
+
+.portfolio .portfolio-nav-btn:hover {
+  color: #111;
+  transform: translateY(-50%) scale(1.2);
+  animation-play-state: paused;
+}
+
+.portfolio .portfolio-nav-btn:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+@media (max-width: 992px) {
+  .portfolio .portfolio-nav-btn.prev { left: -20px; }
+  .portfolio .portfolio-nav-btn.next { right: -20px; }
+  .portfolio .portfolio-nav-btn { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+  .portfolio .portfolio-nav-btn { display: none; }
 }
 
 .portfolio .portfolio-title {
@@ -1264,25 +1329,56 @@ section,
 .portfolio .portfolio-dots {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .portfolio .portfolio-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid #111;
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  border: 2px solid transparent;
   background: transparent;
   padding: 0;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.25s ease;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.portfolio .portfolio-dot:hover {
-  transform: scale(1.1);
+.portfolio .portfolio-dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.4s ease;
+}
+
+.portfolio .portfolio-dot:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
 .portfolio .portfolio-dot.is-active {
-  background: #111;
+  border-color: #111;
+  background: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.portfolio .portfolio-dot.is-active img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@media (max-width: 576px) {
+  .portfolio .portfolio-dot {
+    width: 35px;
+    height: 35px;
+  }
 }
 
 .portfolio .portfolio-body {
@@ -1508,7 +1604,8 @@ section,
   font-size: clamp(14px, 1.35vw, 18px);
   line-height: 1.6;
   color: #1f2937;
-  white-space: pre-line;
+  white-space: pre-wrap;
+  tab-size: 4;
 }
 
 #portfolio-feature-description {

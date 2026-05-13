@@ -272,47 +272,59 @@
   const portfolioDescription = document.querySelector('#portfolio-feature-description');
   const portfolioGallery = document.querySelector('#portfolio-feature-gallery');
   const portfolioPreview = document.querySelector('#portfolio-feature-preview');
-  const portfolioDots = document.querySelectorAll('.portfolio-dot');
-
+  const portfolioDots = document.querySelectorAll('.portfolio-dot');    const btnPrev = document.querySelector('#portfolio-prev');
+    const btnNext = document.querySelector('#portfolio-next');
+    
+    let currentIndex = 0;
   if (portfolioBody && portfolioMediaHost && portfolioExperience && portfolioTitle && portfolioDescription && portfolioGallery && portfolioPreview && portfolioDots.length) {
     const portfolioProjects = [
       {
         title: 'NightLight:',
         description: 'Videojuego 2D en Pixel Art de vista superior con elementos de terror psicologico y puzzles',
-        experience: '-Diseño de niveles y puzzles coherentes con la narrativa del juego, utilizando Tilemaps, Tilesets y herramientas de diseño de niveles en Unity.\n-Desarrollo de assets en 2D-estilo pixel art, implementados en Unity con sus respectivas animaciones conforme al estilo del juego.',
+        experience: 'El presente proyecto surgió en el contexto de la Game Jam “Limited Capacity”. La premisa fue abordada desde diferentes elementos, como el campo de visión del jugador, la gestión de recursos y el uso de objetos mediante un pseudo-inventario, que repercutían en el gameplay y en la atmósfera restrictiva, pero estimulante, del juego. \n\n \t -Diseño de niveles y puzzles coherentes con la narrativa del juego, utilizando Tilemaps, Tilesets y herramientas de diseño de niveles en Unity. \n\t -Desarrollo de assets 2D en estilo pixel art, implementados en Unity con sus respectivas animaciones conforme al estilo visual del juego.',
         gallery: [
+          {
+            type: 'image',
+            src: 'assets/img/portfolio/Night_3.png',
+            alt: 'Captura de NightLight 1'
+          },
           {
             type: 'image',
             src: 'assets/img/portfolio/Night_2.png',
             alt: 'Captura de NightLight 2'
           },
           {
-            type: 'image',
-            src: 'assets/img/portfolio/Night_3.png',
+            type: 'video',
+            src: 'assets/img/portfolio/Abomination_3.mp4',
             alt: 'Captura de NightLight 3'
           }
         ],
         type: 'image',
         src: 'assets/img/portfolio/NighLight.png',
         alt: 'Proyecto 1',
-        objectPosition: 'center 90%',
+        objectPosition: 'center top',
         url: 'https://sebastian-franco-gomez.itch.io/nightlight'
       },
       
       {
         title: 'My Little Abomination',
-        description: 'Videojuego 2D en arte lineal con estetica "cozy" y gameplay divertido y humorístico',
-        experience: 'Experiencia: implementación de sistemas base y ajustes visuales del flujo principal.',
+        description: 'Videojuego 2D en arte lineal estilo "cozy" con gameplay divertido y humorístico',
+        experience: 'El presente proyecto surgió en el contexto de la Game Jam “Wrong Genre Game Jam”, y su principal reto fue el tiempo límite de un día. Por lo tanto, la premisa fue abordada desde una fuerte planificación de tareas, gestión del tiempo y una temática simple, pero efectiva, que buscaba subvertir un género cozy y relajante para convertirlo en el preámbulo de una experiencia más frenética y caótica, cargada de sátira e incongruencias divertidas hacia las digital pets.\n\n \t -Diseño de niveles coherentes con la estética del juego, ajuste de colliders y organización de capas. \n\t -Creación de assets 2D para el entorno, basados en los tiempos establecidos y conforme al GDD.',
         gallery: [
           {
             type: 'image',
             src: 'assets/img/portfolio/abomination_1.png',
-            alt: 'Captura del proyecto 2'
+            alt: 'Captura del proyecto 1'
           },
           {
             type: 'image',
             src: 'assets/img/portfolio/abomination_2.png',
             alt: 'Captura del proyecto 2'
+          },
+          {
+            type: 'video',
+            src: 'assets/img/portfolio/Little_3.mp4',
+            alt: 'Captura del proyecto 3'
           }
         ],
         type: 'image',
@@ -322,19 +334,31 @@
         url: 'https://juan-becerra.itch.io/my-little-abomination'
       },
       {
-        title: 'Proyecto 3',
-        description: 'Descripcion de las funciones del proyecto 3. Añade enfoque tecnico y valor para el usuario final.',
-        experience: 'Experiencia: integración de video, presentación del prototipo y validación del resultado final.',
+        title: 'The Fate of Anubis',
+        description: 'Videojuego 2D estilo metroidvania con narrativa post-humana y estética cyberpunk.',
+        experience: 'El presente proyecto es una propuesta ambiciosa y retadora, con un apartado artístico que imbuye al jugador en una narrativa temática y lo reta a través de las mecánicas de juego, la exploración y el combate. El principal desafío fue la envergadura del proyecto: pulir el game loop, manejar el control de versiones con Git, implementar sistemas de IA y, de manera destacable, realizar el seguimiento y la concertación con el equipo de desarrollo. \n\n \t -Integración y optimización de assets 2D de personajes y escenarios interactivos en Unity, garantizando coherencia visual y rendimiento. \n\t -Desarrollo de mecánicas y sistemas de trampas en C#, configurables desde la escena e inspector de Unity.\n\t-Implementación de modelos LLM en Unity para enriquecer la interacción con NPCs y expandir el lore del juego.',
         gallery: [
           {
             type: 'image',
-            src: 'assets/img/portfolio/branding-1.jpg',
+            src: 'assets/img/portfolio/Anubis_x.png',
+            alt: 'Captura del proyecto 1'
+          },
+          {
+            type: 'video',
+            src: 'assets/img/portfolio/Anubis_2.mp4',
+            alt: 'Captura del proyecto 2'
+          },
+          {
+            type: 'video',
+            src: 'assets/img/portfolio/Anubis_3.mp4',
             alt: 'Captura del proyecto 3'
           }
         ],
-        type: 'video',
-        src: 'assets/img/portfolio/demo.mp4',
-        poster: 'assets/img/portfolio/branding-1.jpg'
+        type: 'image',
+        src: 'assets/img/portfolio/Anubis_0.jpeg',
+        alt: 'Proyecto 3',
+        objectPosition: 'center top',
+        url: 'https://juan-becerra.itch.io/the-fate-anibus'
       }
     
     ];
@@ -428,6 +452,7 @@
       const project = portfolioProjects[index];
       if (!project) return;
 
+      currentIndex = index;
       portfolioBody.classList.add('is-changing');
 
       setTimeout(() => {
@@ -461,6 +486,10 @@
           dot.classList.toggle('is-active', i === index);
         });
 
+        // Actualizar visibilidad de flechas
+        if (btnPrev) btnPrev.style.visibility = index === 0 ? 'hidden' : 'visible';
+        if (btnNext) btnNext.style.visibility = index === portfolioProjects.length - 1 ? 'hidden' : 'visible';
+
         portfolioBody.classList.remove('is-changing');
       }, 180);
     }
@@ -471,6 +500,22 @@
         renderProject(index);
       });
     });
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          renderProject(currentIndex - 1);
+        }
+      });
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        if (currentIndex < portfolioProjects.length - 1) {
+          renderProject(currentIndex + 1);
+        }
+      });
+    }
 
     renderProject(0);
   }
