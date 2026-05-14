@@ -319,17 +319,17 @@
           },
           {
             type: 'image',
-            src: 'assets/img/portfolio/abomination_2.png',
+            src: 'assets/img/portfolio/Abomination_2.png',
             alt: 'Captura del proyecto 2'
           },
           {
             type: 'image',
-            src: 'assets/img/portfolio/abomination_1.png',
+            src: 'assets/img/portfolio/Abomination_1.png',
             alt: 'Captura del proyecto 1'
           }
         ],
         type: 'image',
-        src: 'assets/img/portfolio/abomination_0.png',
+        src: 'assets/img/portfolio/Abomination_0.png',
         alt: 'Proyecto 2',
         objectPosition: 'center top',
         url: 'https://juan-becerra.itch.io/my-little-abomination'
